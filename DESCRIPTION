@@ -5,8 +5,7 @@ Date: 2025-10-28
 Authors@R: 
     person("Spencer", "Graves", , "spencer.graves@effectivedefense.org", 
             role = c("aut", "cre"), comment = c(ORCID = "0009-0005-5387-729X"))
-Description: Tools to make it easier for R users to work with the World 
-Inequality Database (WID). 
+Description: Tools to make it easier for R users to work with the World Inequality Database. 
 License: MIT + file LICENSE
 URL: https://github.com/sbgraves237/WID
 BugReports: https://github.com/sbgraves237/WID/issues
