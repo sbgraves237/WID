@@ -62,7 +62,7 @@
 #' }
 #' 
 #' @keywords manip 
-WIDcodes <- function(code='age', data=USdat, meta=USmeta, cols2return){
+WIDcodes <- function(code='age', data, meta, cols2return){
   ##
   ## 1. table(data[, code])
   ##
@@ -93,7 +93,7 @@ WIDcodes <- function(code='age', data=USdat, meta=USmeta, cols2return){
       ctry <- grep('country', names(meta))
       ag <- grep('age', names(meta))
       pp <- grep('pop', names(meta))
-      descs <- unique(c(descs, head(names(meta), -2)[-c(ctry, ag, pp)]))
+      descs <- unique(c(descs, utils::head(names(meta), -2)[-c(ctry, ag, pp)]))
     } 
   } else {
     descs <- cols2return
