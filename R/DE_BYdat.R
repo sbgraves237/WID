@@ -1,0 +1,59 @@
+#' Bavaria data from WID 
+#'
+#' @description
+#' Data on Bavaria from the World Inequality Database (WID). 
+#' This is one of 422 countries and regions downloaded 2025-10-27. 
+#' It was selected as one of the smallest datasets in WID. 
+#' It is included here to help demonstrate the features of this package. 
+#' 
+#'
+#' @format ## `DE_BYdat`
+#' A data frame with 7 columns: 
+#' \describe{
+#'   \item{country}{
+#'      ISO country or region code. These are 2-letter country codes. 
+#'      For regions within countries, the 2 letters for that country are 
+#'      followed by "-" and another 2 or 3 characters. All upper case. 
+#'   }
+#'   \item{variable}{
+#'      code for the variable, e.g., `sfiinct992` for "Fiscal income", further 
+#'      described in `DE_BYmeta`. 
+#'   }
+#'   \item{percentile}{
+#'      code for percentile, e.g., `p0p100` for everyone and `p99p99.9` for 
+#'      those between the 99th and the 99.9th percentile. 
+#'   }
+#'   \item{year}{integer year}
+#'   \item{value}{
+#'      a number whose value is deterimined bythe `unit` for the corresponding 
+#'      `variable`. 
+#'   }
+#'   \item{age}{
+#'      integer code for age range, e.g.,  "1" for ages 0 to 4 and '999' for 
+#'      everyone. 
+#'   }
+#'   \item{pop}{
+#'      A single character: 
+#'    \describe{
+#'      \item{f}{female}
+#'      \item{i}{individuals}
+#'      \item{j}{equal-split adults (most common)}
+#'      \item{m}{male}
+#'      \item{t}{tax unit (e.g., household in the US)}
+#'    }
+#'   }   
+#' }
+#' @examples
+#' table(DE_BYdat$country) # should be `DE_BY` for all observations. 
+#' table(DE_BYdat$varaible) # should be `c(sfiinct992=12, sptinct992=12) 
+#' table(DE_BYdat$percentile) # should be `c(sfiinct992=12, sptinct992=12) 
+#' 
+#' table(DE_BYdat$percentile) # should be 4 each of 
+#' #`p90p100`, `p95p100`, `p99.5p100`, `p99.99p100`, `p99.9p100`, and `p99p100`. 
+#' 
+#' table(DE_BYdat$age) # should be all 992 = adults, i.e., over age 20. 
+#' 
+#' table(DE_BYdat$pop) # should be all `t` 
+#' 
+#' @source <https://wid.world>"World Inequality Database"
+"DE_BYdat"
