@@ -64,6 +64,11 @@ ageExtrap <- WIDcodes('age', DE_BYdat, DE_BYmeta,
 # ageExtrap is a list, 
 # because DE_BYmeta[, c('extrapolation', 'data_points')] are all NAs. 
 
+# to get typeCodes, we must first add it to both DE_BYdat and DE_BYmeta
+DE_BYdat$type <- substring(DE_BYdat$variable, 1, 1)
+DE_BYmeta$type <- substring(DE_BYmeta$variable, 1, 1)
+typeCodes <- WIDcodes('type', DE_BYdat, DE_BYmeta)
+
 \dontrun{
 WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 # throws an error, because 'percentile' is not in names(DE_BYmeta)
