@@ -62,7 +62,7 @@
 #' }
 #' 
 #' @keywords manip 
-WIDcodes <- function(code='age', data, meta, cols2return){
+WIDcodes <- function(code, data, meta, cols2return){
   ##
   ## 1. table(data[, code])
   ##
