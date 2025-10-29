@@ -56,6 +56,11 @@
 #' # ageExtrap is a list, 
 #' # because DE_BYmeta[, c('extrapolation', 'data_points')] are all NAs. 
 #' 
+#' # to get typeCodes, we must first add it to both DE_BYdat and DE_BYmeta
+#' DE_BYdat$type <- substring(DE_BYdat$variable, 1, 1)
+#' DE_BYmeta$type <- substring(DE_BYmeta$variable, 1, 1)
+#' typeCodes <- WIDcodes('type', DE_BYdat, DE_BYmeta)
+#' 
 #' \dontrun{
 #' WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 #' # throws an error, because 'percentile' is not in names(DE_BYmeta)
@@ -76,6 +81,10 @@ WIDcodes <- function(code, data, meta, cols2return){
     stop('code = ', code, ' not in names(data) = ', 
          paste(names(data), collapse=', '))
   }
+  if(!(code %in% names(meta))){
+    stop('code = ', code, ' not in names(meta) = ', 
+         paste(names(meta), collapse=', '))
+  }
   codes <- table(data[, code])
   Codes <- names(codes)
   nCodes <- length(Codes)
@@ -85,10 +94,6 @@ WIDcodes <- function(code, data, meta, cols2return){
   if(missing(cols2return)){ 
     descs <- grep(code, names(meta), value=TRUE)
     k <- length(descs)
-    if(k<1){
-      stop('code = ', code, ' not found in names(meta) = ', 
-         paste(names(meta), collapse=', '))
-    }
     if(k<2){
       ctry <- grep('country', names(meta))
       ag <- grep('age', names(meta))
@@ -96,15 +101,11 @@ WIDcodes <- function(code, data, meta, cols2return){
       descs <- unique(c(descs, utils::head(names(meta), -2)[-c(ctry, ag, pp)]))
     } 
   } else {
-    descs <- cols2return
+    descs <- unique(c(code, cols2return))
   }
   k <- length(descs)
   cd <- which(descs == code)
-  if(length(cd)<1){
-      descs <- c(code, descs)
-  } else {
-      descs <- c(code, descs[-cd])
-  }
+  descs <- c(code, descs[-cd])
   ##
   ## 3. find each code in meta and see if the corresponding descriptions in meta
   ##    are unique for each code
