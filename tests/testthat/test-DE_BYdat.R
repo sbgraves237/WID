@@ -15,3 +15,17 @@ test_that("DE_BYdat", {
   pop <- table(rep('t', 24))
   expect_equal(table(DE_BYdat$pop), pop) 
 })
+
+test_that("DE_BYmeta", {
+  Ctry <- table(rep("DE-BY", 2L))
+  expect_equal(table(DE_BYmeta$country), Ctry)
+  #
+  Vari <- table(c('sfiinct992', 'sptinct992'))
+  expect_equal(table(DE_BYmeta$variable), Vari)
+  #
+  Age <- table(rep(992, 2))
+  expect_equal(table(DE_BYmeta$age), Age) 
+  #   
+  Pop <- table(rep('t', 2))
+  expect_equal(table(DE_BYmeta$pop), Pop) 
+})
