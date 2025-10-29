@@ -32,18 +32,19 @@
 #'      followed by "-" and another 2 or 3 characters. All upper case. 
 #'   }
 #'   \item{variable}{
-#'      code for the variable, e.g., `sfiinct992` for "Fiscal income", further 
+#'      code for the variable, e.g., `sfiinct992` and `sptinct992`, further 
 #'      described in `DE_BYmeta`. 
 #'      
-#'      The complete WID variable codes (i.e. sfiinct992) obey to the following 
-#'      logic:
+#'      The complete WID variable codes (e.g., `sfiinct992` and `sptinct992`) 
+#'      obey to the following logic:
 #'        * the first letter indicates the variable type (i.e. "s" for share).
 #'        * the next five letters indicate the income/wealth/other concept 
-#'          (i.e. "ptinc" for pre-tax national income).
-#'        * the next three digits indicate the age group (i.e. "992" for 
+#'          (e.g., `fiinc` for "Fiscal income" and `ptinc` for "pre-tax 
+#'          national income").
+#'        * the next letter indicate the population unit described with `pop`
+#'          below. 
+#'        * the last three characters indicate the age group (e.g. "992" for 
 #'          adults).
-#'        * the last letter indicate the population unit (i.e. "j" for 
-#'          equal-split).
 #'   }
 #'   \item{percentile}{
 #'      code for percentile, e.g., `p0p100` for everyone and `p99p99.9` for 
