@@ -4,7 +4,7 @@
 \alias{WIDcodes}
 \title{WIDcodes}
 \usage{
-WIDcodes(code = "age", data = USdat, meta = USmeta, cols2return)
+WIDcodes(code = "age", data, meta, cols2return)
 }
 \arguments{
 \item{code}{name of a column of \code{data} for which matching information in
