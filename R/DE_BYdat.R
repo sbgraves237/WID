@@ -126,15 +126,15 @@
 #'      Methological details describing how the data was constructed and/or 
 #'      caveats.
 #'   }
-#'   \item{extrapolation}
-#'      `NA` in `DE_BYmeta` but in other `WID_metadata_*.csv` files, this 
+#'   \item{extrapolation}{
+#'      NA in `DE_BYmeta` but in other `WID_metadata_*.csv` files, this 
 #'      sometimes contain year ranges for which data were extrapolated. For 
 #'      example, in the comparable `WID_metadata_US.csv`, this variable is 
-#'      blank for most variables but has values like "[[2018, 2020]]" and 
-#'      "[[1980, 1990], [2018, 2020]]". 
+#'      blank for most variables but has values like `[[2018, 2020]]` and 
+#'      `[[1980, 1990], [2018, 2020]]`. 
 #'   }
-#'   \item{data_points{
-#'      `NA` in `DE_BYmeta` but in other `WID_metadata_*.csv` files, this 
+#'   \item{data_points}{
+#'      NA in `DE_BYmeta` but in other `WID_metadata_*.csv` files, this 
 #'      sometimes contain years for which data were available. For example, in 
 #'      the comparable `WID_metadata_US.csv`, this variable is blank for most 
 #'      variables but is `[2004, 2007, 2011, 2014]` for 8 observations dealing 
