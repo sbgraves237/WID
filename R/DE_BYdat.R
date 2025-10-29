@@ -45,15 +45,15 @@
 #' }
 #' @examples
 #' table(DE_BYdat$country) # should be `DE_BY` for all observations. 
-#' table(DE_BYdat$varaible) # should be `c(sfiinct992=12, sptinct992=12) 
+#' table(DE_BYdat$variable) # should be `c(sfiinct992=12, sptinct992=12) 
 #' table(DE_BYdat$percentile) # should be `c(sfiinct992=12, sptinct992=12) 
 #' 
 #' table(DE_BYdat$percentile) # should be 4 each of 
 #' #`p90p100`, `p95p100`, `p99.5p100`, `p99.99p100`, `p99.9p100`, and `p99p100`. 
 #' 
-#' table(DE_BYdat$age) # should be all 992 = adults, i.e., over age 20. 
+#' table(DE_BYdat$age) # should be `c(992=24)` = adults, i.e., over age 20. 
 #' 
-#' table(DE_BYdat$pop) # should be all `t` 
+#' table(DE_BYdat$pop) # should be `c(t=24)`. 
 #' 
 #' @source <https://wid.world>"World Inequality Database"
 "DE_BYdat"
