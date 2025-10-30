@@ -26,6 +26,28 @@ described in \code{DE_BYmeta}.
      below. 
    * the last three characters indicate the age group (e.g. "992" for 
      adults).
+     
+  File `WID_data_US.csv` contained in the full download from the 
+  [World Inequality Database](https://wid.world/data/) website on 
+  2025-10-27 contained the following types obtained using [WIDcodes]: 
+  
+  \\tabular\{lll\}\{
+    type \\tab count \\tab shorttype
+    a \\tab 381099 \\tab Average
+    b \\tab  95243 \\tab Beta coefficient
+    e \\tab    906 \\tab Total emissions
+    g \\tab    748 \\tab Gini coefficient
+    i \\tab    519 \\tab Indices
+    k \\tab    906 \\tab Per-capita emissions
+    l \\tab  17190 \\tab Average per capita group emissions
+    m \\tab  31378 \\tab Total
+    n \\tab  11906 \\tab Population
+    r \\tab   2257 \\tab Top 10/Bottom 50 ratio 
+    s \\tab 333286 \\tab Share
+    t \\tab 293285 \\tab Threshold 
+    w \\tab  19862 \\tab \% of NNI
+    x \\tab   1575 \\tab Exchange rates
+    y \\tab  21568 \\tab \% of GDP
 }\if{html}{\out{</div>}}
 
 }
