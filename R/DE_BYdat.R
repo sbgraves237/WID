@@ -67,6 +67,7 @@
 #'         w \tab  19862 \tab % of NNI
 #'         x \tab   1575 \tab Exchange rates
 #'         y \tab  21568 \tab % of GDP
+#'      }
 #'   }
 #'   \item{percentile}{
 #'      code for percentile, e.g., `p0p100` for everyone and `p99p99.9` for 
