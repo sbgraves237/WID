@@ -37,4 +37,12 @@ test_that("WIDcodes", {
         "technicaldes", "shorttype", "longtype", "unit", "source", 
         "method", "type") )
   expect_true(inherits(conceptCodes, 'data.frame'))
+  
+  ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta, 'concept')
+  ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta, c('age', 'concept'))
+  # ageC2 has attr(ageC2, 'nonunique') = table(DE_BYmeta$concept)
+  # different from ageCodes, because DE__BYmeta has changed. 
+  ageC2nonu <- attr(ageC2, 'nonunique')
+  ageC2nonu1 <- list('992' = list(concept=table(DE_BYmeta$concept)))
+  expect_equal(ageC2nonu, ageC2nonu1)
 })
