@@ -75,6 +75,9 @@
 #' WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 #' # throws an error, because 'percentile' is not in names(DE_BYmeta)
 #' }
+#' # Will have attr(ageC2, 'nonunique') = table(DE_BYmeta$concept)
+#' # here but not before, because DE__BYmeta has changed. 
+#' ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta)
 #' 
 #' @keywords manip 
 WIDcodes <- function(code, data, meta, cols2return){
@@ -141,7 +144,7 @@ WIDcodes <- function(code, data, meta, cols2return){
   colnames(Dc) <- descs
   for(i in 1:nCodes){
     seli <- (meta[, code] == Codes[i])
-    desci <- meta[seli, descs]
+    desci <- meta[seli, descs, drop=FALSE]
     Descij <- vector('list', k)
     names(Descij) <- descs
     for(j in 1:k){
@@ -170,7 +173,7 @@ WIDcodes <- function(code, data, meta, cols2return){
   colnames(out1)[1] <- code
   out <- cbind(out1, Df)
   rownames(out) <- Codes 
-  if(length(Dl)>0)attr(out, 'nonunique') <- DL_
+  if(length(Dl)>0)attr(out, 'nonunique') <- DL
   ##
   ## 6. Done
   ##  
