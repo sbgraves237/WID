@@ -48,6 +48,7 @@ described in \code{DE_BYmeta}.
     w \\tab  19862 \\tab \% of NNI
     x \\tab   1575 \\tab Exchange rates
     y \\tab  21568 \\tab \% of GDP
+ \}
 }\if{html}{\out{</div>}}
 
 }
