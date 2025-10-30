@@ -15,19 +15,26 @@ test_that("WIDcodes", {
   
   ageExtrap <- WIDcodes('age', DE_BYdat, DE_BYmeta, 
                    c('extrapolation', 'data_points'))
-  expect_equal(names(ageExtrap), '992')
-  expect_true(inherits(ageExtrap, 'list'))
-  # ageExtrap is a list of length 1 with name '992' 
-  # because DE_BYmeta[, c('extrapolation', 'data_points')] are all NAs. 
-  expect_false(inherits(ageExtrap, 'data.frame'))
-  
+  expect_equal(dimnames(ageExtrap), list('992', c('age', 'count')))
+
   expect_error(WIDcodes('percentile', DE_BYdat, DE_BYmeta))
   # throws an error, because 'percentile' is not in names(DE_BYmeta)
   
+  # type 
   DE_BYdat$type <- substring(DE_BYdat$variable, 1, 1)
   DE_BYmeta$type <- substring(DE_BYmeta$variable, 1, 1)
   typeCodes <- WIDcodes('type', DE_BYdat, DE_BYmeta)
   expect_equal(names(typeCodes), 
                c('type', 'count', 'shorttype', 'longtype'))
   expect_true(inherits(typeCodes, 'data.frame'))
+  
+  # concept 
+  DE_BYdat$concept <- substring(DE_BYdat$variable, 2, 6)
+  DE_BYmeta$concept <- substring(DE_BYmeta$variable, 2, 6)
+  conceptCodes <- WIDcodes('concept', DE_BYdat, DE_BYmeta)
+  expect_equal(names(conceptCodes), 
+      c('concept', 'count', "variable", "shortname", "simpledes", 
+        "technicaldes", "shorttype", "longtype", "unit", "source", 
+        "method", "type") )
+  expect_true(inherits(conceptCodes, 'data.frame'))
 })
