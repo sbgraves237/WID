@@ -58,7 +58,9 @@ column(s) of \code{meta}.
 \description{
 Extract definitions from a \verb{_metadata_} file for variables in a
 corresponding \verb{_data_} file in the
-\href{https://wid.world/}{World Inequalty Database (WID)}.
+\href{https://wid.world/}{World Inequalty Database (WID)}. Information about
+what data are available and how to interpret them is is available in the
+\href{https://wid.world/codes-dictionary}{WID codes disctionary}.
 }
 \examples{
 ageCodes <- WIDcodes('age', DE_BYdat, DE_BYmeta)
