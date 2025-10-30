@@ -38,12 +38,17 @@
 #' NOTE: `WIDcode` assumes that `XX` for `data` matches that of `metadata` but 
 #' does nothing to check this assumption. 
 #'  
-#' @returns either a [list] or a [`data.frame`] gives the values of columns of 
-#' `meta` that correspond to levels of `data[, code]`. If only one level of 
-#' the selected columns of `meta` is found for each level of `code`, the object
-#' returned is a `data.frame` with one row for each level of `code` in `data`. 
-#' Otherwise, a list is returned with names being the levels of `code` in 
-#' `data`. 
+#' @returns a [`data.frame`] with the values of columns of `meta` that 
+#' correspond to levels of `data[, code]` if only one value for that varable is 
+#' found, If more than one level of a selected column of `meta` are found, 
+#' those values are retained not as a column of the `data.frame` but in a 
+#' `nonunique` attribute, which is a list with names of the levels of `code` 
+#' (and therefore the same length as the number of rows of the `data.frame`) 
+#' with all the levels of the non-unique column(s) of `meta`. The `rownames`
+#' and the first column of the `data.frame` are the names of the levels of 
+#' `data[, code]`. The second column is the counts from `table(data[, code])`. 
+#' The remaining columns are the nonunique values found in the selected 
+#' column(s) of `meta`. 
 #' 
 #' @export
 #'
@@ -61,6 +66,11 @@
 #' DE_BYmeta$type <- substring(DE_BYmeta$variable, 1, 1)
 #' typeCodes <- WIDcodes('type', DE_BYdat, DE_BYmeta)
 #' 
+#' # Let's also get concept 
+#' DE_BYdat$concept <- substring(DE_BYdat$variable, 2, 6)
+#' DE_BYmeta$concept <- substring(DE_BYmeta$variable, 2, 6)
+#' conceptCodes <- WIDcodes('concept', DE_BYdat, DE_BYmeta)
+#' 
 #' \dontrun{
 #' WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 #' # throws an error, because 'percentile' is not in names(DE_BYmeta)
@@ -69,8 +79,11 @@
 #' @keywords manip 
 WIDcodes <- function(code, data, meta, cols2return){
   ##
-  ## 1. table(data[, code])
+  ## 1. Check arguments 
   ##
+  if(missing(code)){
+    stop('Argument code is required for WIDcodes; is missing.')
+  }
   if(missing(data)){
     stop('Argument data is required for WIDcodes; is missing.')
   }
@@ -85,62 +98,81 @@ WIDcodes <- function(code, data, meta, cols2return){
     stop('code = ', code, ' not in names(meta) = ', 
          paste(names(meta), collapse=', '))
   }
+  ##
+  ## 2. table(data[, code])
+  ##
   codes <- table(data[, code])
   Codes <- names(codes)
   nCodes <- length(Codes)
   ##
-  ## 2. find names(meta) that describe code
+  ## 3. find names(meta) that describe code
   ##
   if(missing(cols2return)){ 
-    descs <- grep(code, names(meta), value=TRUE)
+    desc0 <- grep(code, names(meta), value=TRUE)
+    descs <- desc0[desc0 != code]
     k <- length(descs)
     if(k<2){
-      ctry <- grep('country', names(meta))
-      ag <- grep('age', names(meta))
-      pp <- grep('pop', names(meta))
-      descs <- unique(c(descs, utils::head(names(meta), -2)[-c(ctry, ag, pp)]))
+      ctry <- grep('country', names(meta), value=TRUE)
+      ag <- grep('age', names(meta), value=TRUE)
+      pp <- grep('pop', names(meta), value=TRUE)
+      no <- (names(meta) %in% c(code, ctry, ag, pp))
+      descs <- names(meta)[!no]
     } 
   } else {
-    descs <- unique(c(code, cols2return))
+    chk_c2r <- (cols2return %in% names(meta))
+    if(any(!chk_c2r)){
+      ermsg1 <- 'some calls2return not found in names(meta)\n'
+      ermsg2 <- paste0('call2return not found = ', 
+          paste(cols2return[!chk_c2r], collapse=', '), '\n')
+      ermsg3 <- paste0('names(meta) = ', paste(names(meta), ', '))
+      stop(ermsg1, ermsg2, ermsg3)
+    }
+    descs <- cols2return
   }
   k <- length(descs)
-  cd <- which(descs == code)
-  descs <- c(code, descs[-cd])
   ##
-  ## 3. find each code in meta and see if the corresponding descriptions in meta
-  ##    are unique for each code
+  ## 4. find each code in meta and see if the corresponding descriptions in 
+  ##    meta are unique for each code.
   ##
   Descs <- vector('list', nCodes)
   names(Descs) <- Codes
-  Dc <- Descs
+  Dc <- matrix(NA, nCodes, k)
+  rownames(Dc) <- Codes 
+  colnames(Dc) <- descs
   for(i in 1:nCodes){
     seli <- (meta[, code] == Codes[i])
     desci <- meta[seli, descs]
     Descij <- vector('list', k)
+    names(Descij) <- descs
     for(j in 1:k){
-      Descij[[j]] <- table(desci[, j])
+      Dij <- table(desci[, j])
+      Descij[[j]] <- Dij
+      Dc[i, j] <- length(Dij)
     }
     Descs[[i]] <- Descij
-    Dc[[i]] <- sapply(Descij, length)
   }
   ## 
-  ## 4. Are all descriptions unique? 
+  ## 5. For which variables in descs are descriptions in meta unique? 
   ##
-  Dc. <- table(unlist(Dc))
-  if(length(Dc.)<2){
-    for(i in 1:nCodes){
-      Di <- sapply(Descs[[i]], names)
-      Descs[[i]] <- c(Di[1], as.numeric(Descs[[i]][1]), Di[-1])
-    }
-    De <- matrix(unlist(Descs), nCodes, byrow=TRUE)
-    rownames(De) <- Codes
-    colnames(De) <- c(descs[1], 'count', descs[-1])
-    De. <- as.data.frame(De)
-    De.[[2]] <- as.integer(codes)
-    Descs <- De. 
+  Dc_ <- apply(Dc, 2, max)
+  Dd <- descs[Dc_ == 1]
+  Dl <- descs[Dc_ > 1]
+  Df <- matrix(NA, nCodes, length(Dd))
+  colnames(Df) <- Dd
+  rownames(Df) <- Codes
+  DL <- vector('list', nCodes)
+  names(DL) <- Codes
+  for(i in 1:nCodes){
+    Df[i, ] <- sapply(Descs[[i]][Dd], names)
+    DL[[i]] <- Descs[[i]][Dl]
   }
+  out1 <- data.frame(code=Codes, count=as.integer(codes))
+  colnames(out1)[1] <- code
+  out <- cbind(out1, Df)
+  rownames(out) <- Codes 
+  if(length(Dl)>0)attr(out, 'nonunique') <- DL_
   ##
-  ## 5. Done
+  ## 6. Done
   ##  
-  Descs
+  out
 }
