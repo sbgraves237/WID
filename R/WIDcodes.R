@@ -77,7 +77,7 @@
 #' }
 #' # Will have attr(ageC2, 'nonunique') = table(DE_BYmeta$concept)
 #' # here but not before, because DE__BYmeta has changed. 
-#' ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta)
+#' ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta, 'concept')
 #' 
 #' @keywords manip 
 WIDcodes <- function(code, data, meta, cols2return){
