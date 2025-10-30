@@ -83,6 +83,9 @@ conceptCodes <- WIDcodes('concept', DE_BYdat, DE_BYmeta)
 WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 # throws an error, because 'percentile' is not in names(DE_BYmeta)
 }
+# Will have attr(ageC2, 'nonunique') = table(DE_BYmeta$concept)
+# here but not before, because DE__BYmeta has changed. 
+ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta)
 
 }
 \keyword{manip}
