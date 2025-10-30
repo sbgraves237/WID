@@ -43,12 +43,17 @@ NOTE: \code{WIDcode} assumes that \code{XX} for \code{data} matches that of \cod
 does nothing to check this assumption.}
 }
 \value{
-either a \link{list} or a \code{\link{data.frame}} gives the values of columns of
-\code{meta} that correspond to levels of \code{data[, code]}. If only one level of
-the selected columns of \code{meta} is found for each level of \code{code}, the object
-returned is a \code{data.frame} with one row for each level of \code{code} in \code{data}.
-Otherwise, a list is returned with names being the levels of \code{code} in
-\code{data}.
+a \code{\link{data.frame}} with the values of columns of \code{meta} that
+correspond to levels of \code{data[, code]} if only one value for that varable is
+found, If more than one level of a selected column of \code{meta} are found,
+those values are retained not as a column of the \code{data.frame} but in a
+\code{nonunique} attribute, which is a list with names of the levels of \code{code}
+(and therefore the same length as the number of rows of the \code{data.frame})
+with all the levels of the non-unique column(s) of \code{meta}. The \code{rownames}
+and the first column of the \code{data.frame} are the names of the levels of
+\code{data[, code]}. The second column is the counts from \code{table(data[, code])}.
+The remaining columns are the nonunique values found in the selected
+column(s) of \code{meta}.
 }
 \description{
 Extract definitions from a \verb{_metadata_} file for variables in a
@@ -68,6 +73,11 @@ ageExtrap <- WIDcodes('age', DE_BYdat, DE_BYmeta,
 DE_BYdat$type <- substring(DE_BYdat$variable, 1, 1)
 DE_BYmeta$type <- substring(DE_BYmeta$variable, 1, 1)
 typeCodes <- WIDcodes('type', DE_BYdat, DE_BYmeta)
+
+# Let's also get concept 
+DE_BYdat$concept <- substring(DE_BYdat$variable, 2, 6)
+DE_BYmeta$concept <- substring(DE_BYmeta$variable, 2, 6)
+conceptCodes <- WIDcodes('concept', DE_BYdat, DE_BYmeta)
 
 \dontrun{
 WIDcodes('percentile', DE_BYdat, DE_BYmeta)
