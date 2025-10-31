@@ -15,6 +15,10 @@
 #' [`ISO 3166`](https://en.wikipedia.org/wiki/ISO_3166) code for 
 #' [Bavaria](https://en.wikipedia.org/wiki/Bavaria) ("Bayern" in German). 
 #' 
+#' More information about what data are available from WID and how to interpret 
+#' them is is available in the 
+#' [WID codes dictionary](https://wid.world/codes-dictionary). 
+#' 
 #' `DE_BYdat` is a [`data.frame`] with 7 columns: `country`, `variable`, 
 #' `percentile`, `year`, `value`, `age`, and `pop`. 
 #' 
@@ -163,6 +167,8 @@
 #'   }
 #'   \item{unit}{
 #'      unit of the variable (the 3-letter currency code for monetary amounts).
+#'      All monetary amounts are in local currency at last year' prices for 
+#'      countries and subregions -- USD (US dollars) for the United States. 
 #'   }
 #'   \item{source}{
 #'      The source(s) used to compute the data.
