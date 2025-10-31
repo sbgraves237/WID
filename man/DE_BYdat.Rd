@@ -16,20 +16,23 @@ followed by "-" and another 2 or 3 characters. All upper case.
 code for the variable, e.g., \code{sfiinct992} and \code{sptinct992}, further
 described in \code{DE_BYmeta}.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{ The complete WID variable codes (e.g., `sfiinct992` and `sptinct992`) 
- obey to the following logic:
-   * the first letter indicates the variable type (i.e. "s" for share).
-   * the next five letters indicate the income/wealth/other concept 
-     (e.g., `fiinc` for "Fiscal income" and `ptinc` for "pre-tax 
-     national income").
-   * the next letter indicate the population unit described with `pop`
-     below. 
-   * the last three characters indicate the age group (e.g. "992" for 
-     adults).
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ The complete WID variable codes (e.g., `sfiinct992` and 
+ `sptinct992`) obey to the following logic:
+   * the first letter indicates the variable type (i.e. "s" 
+     for share).
+   * the next five letters indicate the income/wealth/other 
+     concept  (e.g., `fiinc` for "Fiscal income" and `ptinc` 
+     for "pre-tax national income").
+   * the next letter indicate the population unit described 
+     with `pop` below. 
+   * the last three characters indicate the age group (e.g. 
+     "1" for ages 0 to 4, "992" for adults, "999" for all).
      
-  File `WID_data_US.csv` contained in the full download from the 
-  [World Inequality Database](https://wid.world/data/) website on 
-  2025-10-27 contained the following types obtained using [WIDcodes]: 
+  File `WID_data_US.csv` contained in the full download from 
+  the [World Inequality Database](https://wid.world/data/) 
+  website on 2025-10-27 contained the following types (i.e., 
+  first character of `variable`) obtained using the 
+  [WIDcodes] function: 
   
     type count shorttype
      a  381099 Average 
@@ -75,7 +78,7 @@ a number whose value is deterimined bythe \code{unit} for the corresponding
 \code{variable}.
 }
 \item{age}{
-integer code for age range, e.g.,  "1" for ages 0 to 4 and '999' for
+integer code for age range, e.g., "1" for ages 0 to 4 and '999' for
 everyone.
 }
 \item{pop}{
