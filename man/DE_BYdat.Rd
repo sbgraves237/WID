@@ -31,24 +31,22 @@ described in \code{DE_BYmeta}.
   [World Inequality Database](https://wid.world/data/) website on 
   2025-10-27 contained the following types obtained using [WIDcodes]: 
   
-  \\tabular\{rrl\}\{
-    type \\tab count \\tab shorttype
-    a \\tab 381099 \\tab Average \\cr
-    b \\tab  95243 \\tab Beta coefficient \\cr
-    e \\tab    906 \\tab Total emissions \\cr
-    g \\tab    748 \\tab Gini coefficient \\cr
-    i \\tab    519 \\tab Indices \\cr
-    k \\tab    906 \\tab Per-capita emissions \\cr
-    l \\tab  17190 \\tab Average per capita group emissions \\cr
-    m \\tab  31378 \\tab Total \\cr
-    n \\tab  11906 \\tab Population \\cr
-    r \\tab   2257 \\tab Top 10/Bottom 50 ratio \\cr
-    s \\tab 333286 \\tab Share \\cr
-    t \\tab 293285 \\tab Threshold \\cr 
-    w \\tab  19862 \\tab \% of NNI \\cr
-    x \\tab   1575 \\tab Exchange rates \\cr
-    y \\tab  21568 \\tab \% of GDP 
- \}
+    type count shorttype
+     a  381099 Average 
+     b   95243 Beta coefficient 
+     e     906 Total emissions 
+     g     748 Gini coefficient 
+     i     519 Indices 
+     k     906 Per-capita emissions 
+     l   17190 Average per capita group emissions 
+     m   31378 Total 
+     n   11906 Population 
+     r    2257 Top 10/Bottom 50 ratio 
+     s  333286 Share 
+     t  293285 Threshold  
+     w   19862 \% of NNI 
+     x    1575 Exchange rates 
+     y   21568 \% of GDP 
 }\if{html}{\out{</div>}}
 
 }
