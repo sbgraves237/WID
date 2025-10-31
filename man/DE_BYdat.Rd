@@ -85,24 +85,33 @@ those between the 99th and the 99.9th percentile.
 }\if{html}{\out{</div>}}
 
 }
-\item{year}{integer year}
+\item{year}{
+integer year. \code{WID_data_US.csv}downloaded 2025-10-27 has data on
+between 246 and 12,210 variables each year between 1800 and 2024 with
+more variables available on years between 1913 and 2023.
+}
 \item{value}{
-a number whose value is deterimined bythe \code{unit} for the corresponding
+a number whose value is determined by the \code{unit} for the corresponding
 \code{variable}.
 }
 \item{age}{
-integer code for age range, e.g., "1" for ages 0 to 4 and '999' for
-everyone.
+integer code for age range, e.g., "1" for ages 0 to 4, '992' for
+"Adults" (defined as "individuals over age 20"), and '999' for "All
+Ages". The US data downloaded 2025-10-27 has the most information
+available on '992' and '999'.
 }
 \item{pop}{
-A single character:
-\describe{
-\item{f}{female}
-\item{i}{individuals}
-\item{j}{equal-split adults (most common)}
-\item{m}{male}
-\item{t}{tax unit (e.g., household in the US)}
-}
+A single character. Those characters and occurrence in the US data
+downloaded 2025-10-27 are as follows:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{   pop count shortpop
+    f   9038 female
+    i 175652 individuals
+    j 990655 equal-split adults
+    m   9004 male
+    t  27379 tax unit
+}\if{html}{\out{</div>}}
+
 }
 \item{countryname}{
 the name of the country/region as it would appear in an English
