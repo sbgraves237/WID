@@ -50,23 +50,23 @@
 #'       [World Inequality Database](https://wid.world/data/) website on 
 #'       2025-10-27 contained the following types obtained using [WIDcodes]: 
 #'       
-#'       \tabular{lll}{
+#'       \tabular{rrl}{
 #'         type \tab count \tab shorttype
-#'         a \tab 381099 \tab Average
-#'         b \tab  95243 \tab Beta coefficient
-#'         e \tab    906 \tab Total emissions
-#'         g \tab    748 \tab Gini coefficient
-#'         i \tab    519 \tab Indices
-#'         k \tab    906 \tab Per-capita emissions
-#'         l \tab  17190 \tab Average per capita group emissions
-#'         m \tab  31378 \tab Total
-#'         n \tab  11906 \tab Population
-#'         r \tab   2257 \tab Top 10/Bottom 50 ratio 
-#'         s \tab 333286 \tab Share
-#'         t \tab 293285 \tab Threshold 
-#'         w \tab  19862 \tab % of NNI
-#'         x \tab   1575 \tab Exchange rates
-#'         y \tab  21568 \tab % of GDP
+#'         a \tab 381099 \tab Average \cr
+#'         b \tab  95243 \tab Beta coefficient \cr
+#'         e \tab    906 \tab Total emissions \cr
+#'         g \tab    748 \tab Gini coefficient \cr
+#'         i \tab    519 \tab Indices \cr
+#'         k \tab    906 \tab Per-capita emissions \cr
+#'         l \tab  17190 \tab Average per capita group emissions \cr
+#'         m \tab  31378 \tab Total \cr
+#'         n \tab  11906 \tab Population \cr
+#'         r \tab   2257 \tab Top 10/Bottom 50 ratio \cr
+#'         s \tab 333286 \tab Share \cr
+#'         t \tab 293285 \tab Threshold \cr 
+#'         w \tab  19862 \tab % of NNI \cr
+#'         x \tab   1575 \tab Exchange rates \cr
+#'         y \tab  21568 \tab % of GDP 
 #'      }
 #'   }
 #'   \item{percentile}{
