@@ -100,24 +100,31 @@
 #'      748 for each of `p50p51` and `p50p60`. A user would be wise to confirm 
 #'      which values of `percentile` are available for which `variable`. 
 #'   }
-#'   \item{year}{integer year}
+#'   \item{year}{
+#'      integer year. `WID_data_US.csv`downloaded 2025-10-27 has data on 
+#'      between 246 and 12,210 variables each year between 1800 and 2024 with 
+#'      more variables available on years between 1913 and 2023. 
+#'   }
 #'   \item{value}{
-#'      a number whose value is deterimined bythe `unit` for the corresponding 
+#'      a number whose value is determined by the `unit` for the corresponding 
 #'      `variable`. 
 #'   }
 #'   \item{age}{
-#'      integer code for age range, e.g., "1" for ages 0 to 4 and '999' for 
-#'      everyone. 
+#'      integer code for age range, e.g., "1" for ages 0 to 4, '992' for 
+#'      "Adults" (defined as "individuals over age 20"), and '999' for "All 
+#'      Ages". The US data downloaded 2025-10-27 has the most information 
+#'      available on '992' and '999'. 
 #'   }
 #'   \item{pop}{
-#'      A single character: 
-#'    \describe{
-#'      \item{f}{female}
-#'      \item{i}{individuals}
-#'      \item{j}{equal-split adults (most common)}
-#'      \item{m}{male}
-#'      \item{t}{tax unit (e.g., household in the US)}
-#'    }
+#'      A single character. Those characters and occurrence in the US data 
+#'      downloaded 2025-10-27 are as follows: 
+#'      
+#'        pop count shortpop
+#'         f   9038 female
+#'         i 175652 individuals
+#'         j 990655 equal-split adults
+#'         m   9004 male
+#'         t  27379 tax unit
 #'   }
 #'   \item{countryname}{ 
 #'      the name of the country/region as it would appear in an English 
