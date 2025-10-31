@@ -5,7 +5,7 @@
 #' corresponding `_data_` file in the 
 #' [World Inequalty Database (WID)](https://wid.world/). Information about 
 #' what data are available and how to interpret them is is available in the 
-#' [WID codes disctionary](https://wid.world/codes-dictionary). 
+#' [WID codes dictionary](https://wid.world/codes-dictionary). 
 #' 
 #' @param code name of a column of `data` for which matching information in 
 #' `meta` is desired. If `grep(code, names(meta))` finds nothing, `WIDcodes`
