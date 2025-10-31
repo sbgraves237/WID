@@ -52,6 +52,8 @@
 #' The remaining columns are the nonunique values found in the selected 
 #' column(s) of `meta`. 
 #' 
+#' @seealso [DE_BYdat] for a discussion of the data items in WID data. 
+#' 
 #' @export
 #'
 #' @examples
