@@ -56,6 +56,15 @@ described in \code{DE_BYmeta}.
      w   19862 \% of NNI 
      x    1575 Exchange rates 
      y   21568 \% of GDP 
+     
+  In the US data extracted 2025-10-27, data are available for 1,937 
+  different variables. However, if we restrict consideration only to 
+  `type = a` (Average), `pop = j` and `age = 999`, we find almost 
+  43,000 observations on `diinc` = "Post-tax national income" 
+  and less than 200 on other variables. If we want `s` (Share) or `t` 
+  (Threshold), then comparable quantities of data are available only for 
+  `diinc`, `hweal` = "Net personal wealth" and `ptinc` = "Pre-tax 
+  national income". 
 }\if{html}{\out{</div>}}
 
 }
