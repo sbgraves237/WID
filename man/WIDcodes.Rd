@@ -90,4 +90,7 @@ WIDcodes('percentile', DE_BYdat, DE_BYmeta)
 ageC2 <- WIDcodes('age', DE_BYdat, DE_BYmeta, 'concept')
 
 }
+\seealso{
+\link{DE_BYdat} for a discussion of the data items in WID data.
+}
 \keyword{manip}
