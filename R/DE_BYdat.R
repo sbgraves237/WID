@@ -27,9 +27,14 @@
 #' @format 
 #' \describe{
 #'   \item{country}{
-#'      ISO country or region code. These are 2-letter country codes. 
-#'      For regions within countries, the 2 letters for that country are 
-#'      followed by "-" and another 2 or 3 characters. All upper case. 
+#'      ISO country or region code. For countries, these are 2-letter 
+#'      [`ISO 3166-1 alpha-2`](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 
+#'      country codes, e.g., US for United States, DE for Germany 
+#'      ("Deutchland" in German). For regions within countries, these are 5 or 
+#'      6 characters, the first 2 of which is the country. This is followed by 
+#'      "-" and 2 or 3 more characters for the region within the country. For 
+#'      exam, `US-DC` = District of Columbia in the US, and `DE-BY` is Bavaria, 
+#'      as noted above. These codes are all upper case. 
 #'   }
 #'   \item{variable}{
 #'      code for the variable, e.g., `sfiinct992` and `sptinct992`, further 
@@ -38,7 +43,8 @@
 #'      The complete WID variable codes (e.g., `sfiinct992` and 
 #'      `sptinct992`) obey to the following logic:
 #'        * the first letter indicates the variable type (i.e. "s" 
-#'          for share).
+#'          for share, "t" for threshold; see the next paragraph in this 
+#'          section documenting "variable").
 #'        * the next five letters indicate the income/wealth/other 
 #'          concept  (e.g., `fiinc` for "Fiscal income" and `ptinc` 
 #'          for "pre-tax national income").
@@ -65,7 +71,7 @@
 #'          n   11906 Population 
 #'          r    2257 Top 10/Bottom 50 ratio 
 #'          s  333286 Share 
-#'          t  293285 Threshold  
+#'          t  293285 Threshold value at `pX` for percentile `pXpY`.
 #'          w   19862 % of NNI 
 #'          x    1575 Exchange rates 
 #'          y   21568 % of GDP 
@@ -86,6 +92,13 @@
 #'      p99.99, p99.991, p99.992 ,..., p99.999. 
 #'      There are 127 g-percentiles in total, but none appear in `DE-BY` and 
 #'      `US`. 
+#'      
+#'      For the median, combine type = 't' with percentile being, e.g, 
+#'      `p50p51`, `p50p60`, `p50p90` or `p50p100`, all of which are available 
+#'      in `WID_data_US.csv`. With the US data downloaded 2025-10-27, there 
+#'      are 1966 "t" observations for each of `p50p90` and `p50p100` but only 
+#'      748 for each of `p50p51` and `p50p60`. A user would be wise to confirm 
+#'      which values of `percentile` are available for which `variable`. 
 #'   }
 #'   \item{year}{integer year}
 #'   \item{value}{
