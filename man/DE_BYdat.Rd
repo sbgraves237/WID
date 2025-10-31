@@ -150,6 +150,8 @@ longer, more detailed description of the age group in plain English.
 }
 \item{unit}{
 unit of the variable (the 3-letter currency code for monetary amounts).
+All monetary amounts are in local currency at last year' prices for
+countries and subregions -- USD (US dollars) for the United States.
 }
 \item{source}{
 The source(s) used to compute the data.
@@ -198,6 +200,10 @@ WID_metadata_DE-BY.csv", read using \link{read.csv2} into \code{DE_BYdat} and
 code for Germany ("Deutschland", in German), and \code{DE-BY} is the
 \href{https://en.wikipedia.org/wiki/ISO_3166}{\verb{ISO 3166}} code for
 \href{https://en.wikipedia.org/wiki/Bavaria}{Bavaria} ("Bayern" in German).
+
+More information about what data are available from WID and how to interpret
+them is is available in the
+\href{https://wid.world/codes-dictionary}{WID codes dictionary}.
 
 \code{DE_BYdat} is a \code{\link{data.frame}} with 7 columns: \code{country}, \code{variable},
 \code{percentile}, \code{year}, \code{value}, \code{age}, and \code{pop}.
