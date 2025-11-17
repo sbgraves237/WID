@@ -127,10 +127,10 @@ the name of the country/region as it would appear in an English
 sentence.
 }
 \item{shortname}{
-the name of the country/region as it would appear on its own in English.
+the name of the variable as it would appear on its own in English.
 }
 \item{simpledes}{
-decription of the variable in plain English.
+description of the variable in plain English.
 }
 \item{technicaldes}{
 description of the variable via accounting identities.
