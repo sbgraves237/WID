@@ -25,9 +25,13 @@
 #' }
 #' @examples
 #'  
-#' # ISO 2-letter code for the country with German name 'Deutschland'  
+#' # English name of a countryname "Deutschland" in another language: 
 #' (Ger <- countrycode::countryname('Deutschland'))
+#' # ISO 2-letter code for the country with German name 'Deutschland'  
 #' (Ger2 <- countrycode::countrycode('Deutschland', origin='country.name.de', 
+#'               destination='iso2c'))
+#' # ISO 2-letter code for the country with English name "Germany"
+#' (Ger2e <- countrycode::countrycode('Germany', origin='country.name', 
 #'               destination='iso2c'))
 #'  
 #' WIDcountries[c('DE', 'US'), ]
@@ -36,11 +40,15 @@
 #' alphaGT2 <- with(WIDcountries, alpha2[nchalpha2>2])
 #' (alphaGT2_ <- table(substring(alphaGT2, 1, 2)))
 #' 
+#' # China - rural and urban: 
 #' subset(WIDcountries, (substring(alpha2, 1, 1)== 'C') & (nchalpha2>2))
 #' 
+#' # World total: 
+#' subset(WIDcountries,(substr(alpha2, 1, 1)== 'W')&(nchalpha2>2),titlename)
+#' 
+#' # Different regions, collections of countries: 
 #' subset(WIDcountries,(substr(alpha2, 1, 1)== 'O')&(nchalpha2>2),titlename)
 #' subset(WIDcountries,(substr(alpha2, 1, 1)== 'Q')&(nchalpha2>2),titlename)
-#' subset(WIDcountries,(substr(alpha2, 1, 1)== 'W')&(nchalpha2>2),titlename)
 #' subset(WIDcountries,(substr(alpha2, 1, 1)== 'X')&(nchalpha2>2),titlename)
 #' 
 #' @source <https://wid.world>"World Inequality Database"
