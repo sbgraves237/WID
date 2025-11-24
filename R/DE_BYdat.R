@@ -37,8 +37,8 @@
 #'      ("Deutchland" in German). For regions within countries, these are 5 or 
 #'      6 characters, the first 2 of which is the country. This is followed by 
 #'      "-" and 2 or 3 more characters for the region within the country. For 
-#'      exam, `US-DC` = District of Columbia in the US, and `DE-BY` is Bavaria, 
-#'      as noted above. These codes are all upper case. 
+#'      example, `US-DC` = District of Columbia in the US, and `DE-BY` is 
+#'      Bavaria, as noted above. These codes are all upper case. 
 #'   }
 #'   \item{variable}{
 #'      code for the variable, e.g., `sfiinct992` and `sptinct992`, further 
