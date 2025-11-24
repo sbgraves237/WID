@@ -1,11 +1,13 @@
 Package: WID
 Title: Tools for use with the World Inequality Database
 Version: 0.0.0.9000
-Date: 2025-10-28
+Date: 2025-11-23
 Authors@R: 
     person("Spencer", "Graves", , "spencer.graves@effectivedefense.org", 
             role = c("aut", "cre"), comment = c(ORCID = "0009-0005-5387-729X"))
-Description: Tools to make it easier for R users to work with the World Inequality Database. 
+Description: Tools to make it easier for R users to work with the World 
+    Inequality Database (WID), which includes over 800 files totalling over 
+    800 MB zipped. 
 License: MIT + file LICENSE
 URL: https://github.com/sbgraves237/WID
 BugReports: https://github.com/sbgraves237/WID/issues
