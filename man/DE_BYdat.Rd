@@ -14,8 +14,8 @@ country codes, e.g., US for United States, DE for Germany
 ("Deutchland" in German). For regions within countries, these are 5 or
 6 characters, the first 2 of which is the country. This is followed by
 "-" and 2 or 3 more characters for the region within the country. For
-exam, \code{US-DC} = District of Columbia in the US, and \code{DE-BY} is Bavaria,
-as noted above. These codes are all upper case.
+example, \code{US-DC} = District of Columbia in the US, and \code{DE-BY} is
+Bavaria, as noted above. These codes are all upper case.
 }
 \item{variable}{
 code for the variable, e.g., \code{sfiinct992} and \code{sptinct992}, further
