@@ -7,11 +7,12 @@
 #' what data are available and how to interpret them is is available in the 
 #' [WID codes dictionary](https://wid.world/codes-dictionary). 
 #' 
-#' @param code name of a column of `data` for which matching information in 
-#' `meta` is desired. If `grep(code, names(meta))` finds nothing, `WIDcodes`
-#' throws an error. Otherwise it returns the number of matches for each level 
-#' of `code` in `data` followed by the corresponding information in `meta`. 
-#' If `length(grep(code, names(meta)))` > 1, `WIDcodes` returns the 
+#' @param code name (character vector of length 1) of a column of `data` for 
+#' which matching information in `meta` is desired. If 
+#' `grep(code, names(meta))` finds nothing, `WIDcodes` throws an error. 
+#' Otherwise it returns the `count` (number) and `pct` of matches for each 
+#' level of `code` in `data` followed by the corresponding information in 
+#' `meta`. If `length(grep(code, names(meta)))` > 1, `WIDcodes` returns the 
 #' corresponding content of the matching columns of `meta`. 
 #' 
 #' In particular, 
@@ -19,9 +20,9 @@
 #' * `WIDcode('pop', ...)` returns matching columns of `shortpop` and `longpop`.
 #' * `WIDcode('country', ...)` returns matching columns of `countryname`.
 #' 
-#' If `length(grep(code, names(meta)))` = 1, `WIDcodes` returns the the 
-#' contents of corresponding colums of `meta` except those including `age`, 
-#' `pop`, and `country` and except the last two columns (`extrapolation` and 
+#' If `length(grep(code, names(meta)))` = 1, `WIDcodes` returns the contents
+#' of corresponding columns of `meta` except those including `age`, `pop`, and 
+#' `country` and except the last two columns (`extrapolation` and 
 #' `data_points`), which are often missing. 
 #' 
 #' @param data a `data.frame` returned by 
@@ -40,17 +41,22 @@
 #' NOTE: `WIDcode` assumes that `XX` for `data` matches that of `metadata` but 
 #' does nothing to check this assumption. 
 #'  
-#' @returns a [`data.frame`] with the values of columns of `meta` that 
-#' correspond to levels of `data[, code]` if only one value for that varable is 
-#' found, If more than one level of a selected column of `meta` are found, 
-#' those values are retained not as a column of the `data.frame` but in a 
-#' `nonunique` attribute, which is a list with names of the levels of `code` 
-#' (and therefore the same length as the number of rows of the `data.frame`) 
-#' with all the levels of the non-unique column(s) of `meta`. The `rownames`
-#' and the first column of the `data.frame` are the names of the levels of 
-#' `data[, code]`. The second column is the counts from `table(data[, code])`. 
-#' The remaining columns are the nonunique values found in the selected 
-#' column(s) of `meta`. 
+#' @returns a [`data.frame`] describing the different values of `code` found in 
+#' `data` and and `meta`. The first three columns are for `code`, `count`, 
+#' and `pct`. The latter are from the `cols2return` in `meta`. 
+#' 
+#' The name of the first column is the value of `code`. For example, the first 
+#' column of the `data.frame` returned by `WIDcodes('age', ...)` is `age`. 
+#' The next column is `count = table(data[, code)`. This is followed by 
+#' `pct = as.numeric(format(100*count/sum(count)))`. 
+#' 
+#' This is followed by character variables giving the most common value of 
+#' each of `cols2return` in `meta`. We might naively expect that the value of
+#' each of `cols2return` in `meta` would be unique. If that is not the case, 
+#' then "(*)" is appended to the most common value, and the `data.frame` 
+#' returned by `WIDcodes` will have `attr(*, 'nonunique')` being a list of 
+#' tables of frequencies of all values of each nonunique of the `cols2return` 
+#' for each `code` in `meta`. 
 #' 
 #' @seealso [DE_BYdat] for a discussion of the data items in WID data. 
 #' 
@@ -97,6 +103,9 @@ WIDcodes <- function(code, data, meta, cols2return){
   if(missing(meta)){
     stop('Argument meta is required for WIDcodes; is missing.')
   }
+  if(length(code) != 1){
+    stop('length(code) = ', length(code), '; must be 1.') 
+  }
   if(!(code %in% names(data))){
     stop('code = ', code, ' not in names(data) = ', 
          paste(names(data), collapse=', '))
@@ -108,9 +117,13 @@ WIDcodes <- function(code, data, meta, cols2return){
   ##
   ## 2. table(data[, code])
   ##
-  codes <- table(data[, code])
+  codes0 <- table(data[, code], useNA='always')
+  codes <- codes0[codes0!=0] # useNA='always' > tail(codes0, 1) = 0; delete
+  pct <- as.numeric(format(100*codes / sum(codes)))
   Codes <- names(codes)
   nCodes <- length(Codes)
+  out1 <- data.frame(code=Codes, count=as.integer(codes), pct=pct)
+  colnames(out1)[1] <- code
   ##
   ## 3. find names(meta) that describe code
   ##
@@ -137,49 +150,46 @@ WIDcodes <- function(code, data, meta, cols2return){
     descs <- cols2return
   }
   k <- length(descs)
+  outMeta <- matrix(NA, nCodes, k)
+  dimnames(outMeta) <- list(Codes, descs)
   ##
   ## 4. find each code in meta and see if the corresponding descriptions in 
   ##    meta are unique for each code.
   ##
   Descs <- vector('list', nCodes)
   names(Descs) <- Codes
-  Dc <- matrix(NA, nCodes, k)
-  rownames(Dc) <- Codes 
-  colnames(Dc) <- descs
-  for(i in 1:nCodes){
-    seli <- (meta[, code] == Codes[i])
+  for(ic in seq(length=nCodes)){
+    seli <- (meta[, code] == Codes[ic])
     desci <- meta[seli, descs, drop=FALSE]
-    Descij <- vector('list', k)
-    names(Descij) <- descs
-    for(j in 1:k){
-      Dij <- table(desci[, j])
-      Descij[[j]] <- Dij
-      Dc[i, j] <- length(Dij)
-    }
-    Descs[[i]] <- Descij
+    Desci <- do.call(table, desci)
+    dimi <- dim(Desci)
+    Dimi <- dimnames(Desci)
+    Descsi <- list()
+
+    for(jci in seq(length=k)){
+      if(dimi[jci]<1){
+        outMeta[ic, jci] <- NA 
+      } else {
+        if(dimi[jci]<2){
+          outMeta[ic, jci] <- Dimi[[jci]]
+        } else {
+          Dimij <- apply(Desci, jci, sum)
+          Dimij_ <- list(Dimij)
+          names(Dimij_) <- descs[jci]          
+          Descs[[ic]] <- c(Descs[[ic]], Dimij_)
+          outMeta[ic, jci] <- paste0(names(Dimij)[which.max(Dimij)], ';*')
+        }
+      }
+    } 
   }
+  out2 <- cbind(out1, outMeta)
   ## 
   ## 5. For which variables in descs are descriptions in meta unique? 
   ##
-  Dc_ <- apply(Dc, 2, max)
-  Dd <- descs[Dc_ == 1]
-  Dl <- descs[Dc_ > 1]
-  Df <- matrix(NA, nCodes, length(Dd))
-  colnames(Df) <- Dd
-  rownames(Df) <- Codes
-  DL <- vector('list', nCodes)
-  names(DL) <- Codes
-  for(i in 1:nCodes){
-    Df[i, ] <- sapply(Descs[[i]][Dd], names)
-    DL[[i]] <- Descs[[i]][Dl]
-  }
-  out1 <- data.frame(code=Codes, count=as.integer(codes))
-  colnames(out1)[1] <- code
-  out <- cbind(out1, Df)
-  rownames(out) <- Codes 
-  if(length(Dl)>0)attr(out, 'nonunique') <- DL
+  nDescs <- sapply(Descs, length)
+  if(max(nDescs)>0)attr(out2, 'nonunique') <- Descs[nDescs>0]
   ##
   ## 6. Done
   ##  
-  out
+  out2
 }
