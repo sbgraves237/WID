@@ -132,12 +132,13 @@
 #'      A single character. Those characters and occurrence in the US data 
 #'      downloaded 2025-10-27 are as follows: 
 #'      
-#'        pop count shortpop
-#'         f   9038 female
-#'         i 175652 individuals
-#'         j 990655 equal-split adults
-#'         m   9004 male
-#'         t  27379 tax unit
+#'        pop count pct  shortpop
+#'         f   9038  0.7 female
+#'         i 175652 14.5 individuals
+#'         j 990655 81.8 equal-split adults
+#'         m   9004  0.7 male
+#'         t  27379  2.3 tax unit
+#'         
 #'   }
 #'   \item{countryname}{ 
 #'      the name of the country/region as it would appear in an English 
