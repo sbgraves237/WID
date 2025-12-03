@@ -139,6 +139,11 @@
 #'         m   9004  0.7 male
 #'         t  27379  2.3 tax unit
 #'         
+#'      NOTE: This suggests that we use pop = j by default unless we 
+#'      have a reason for wanting something different, at least with US data. 
+#'      With other countries, it may be wise to compute this table for those 
+#'      countries to see if this still holds. 
+#'         
 #'   }
 #'   \item{countryname}{ 
 #'      the name of the country/region as it would appear in an English 
