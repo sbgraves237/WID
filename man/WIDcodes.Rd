@@ -7,11 +7,12 @@
 WIDcodes(code, data, meta, cols2return)
 }
 \arguments{
-\item{code}{name of a column of \code{data} for which matching information in
-\code{meta} is desired. If \code{grep(code, names(meta))} finds nothing, \code{WIDcodes}
-throws an error. Otherwise it returns the number of matches for each level
-of \code{code} in \code{data} followed by the corresponding information in \code{meta}.
-If \code{length(grep(code, names(meta)))} > 1, \code{WIDcodes} returns the
+\item{code}{name (character vector of length 1) of a column of \code{data} for
+which matching information in \code{meta} is desired. If
+\code{grep(code, names(meta))} finds nothing, \code{WIDcodes} throws an error.
+Otherwise it returns the \code{count} (number) and \code{pct} of matches for each
+level of \code{code} in \code{data} followed by the corresponding information in
+\code{meta}. If \code{length(grep(code, names(meta)))} > 1, \code{WIDcodes} returns the
 corresponding content of the matching columns of \code{meta}.
 
 In particular,
@@ -21,9 +22,9 @@ In particular,
 \item \code{WIDcode('country', ...)} returns matching columns of \code{countryname}.
 }
 
-If \code{length(grep(code, names(meta)))} = 1, \code{WIDcodes} returns the the
-contents of corresponding colums of \code{meta} except those including \code{age},
-\code{pop}, and \code{country} and except the last two columns (\code{extrapolation} and
+If \code{length(grep(code, names(meta)))} = 1, \code{WIDcodes} returns the contents
+of corresponding columns of \code{meta} except those including \code{age}, \code{pop}, and
+\code{country} and except the last two columns (\code{extrapolation} and
 \code{data_points}), which are often missing.}
 
 \item{data}{a \code{data.frame} returned by
@@ -43,17 +44,22 @@ NOTE: \code{WIDcode} assumes that \code{XX} for \code{data} matches that of \cod
 does nothing to check this assumption.}
 }
 \value{
-a \code{\link{data.frame}} with the values of columns of \code{meta} that
-correspond to levels of \code{data[, code]} if only one value for that varable is
-found, If more than one level of a selected column of \code{meta} are found,
-those values are retained not as a column of the \code{data.frame} but in a
-\code{nonunique} attribute, which is a list with names of the levels of \code{code}
-(and therefore the same length as the number of rows of the \code{data.frame})
-with all the levels of the non-unique column(s) of \code{meta}. The \code{rownames}
-and the first column of the \code{data.frame} are the names of the levels of
-\code{data[, code]}. The second column is the counts from \code{table(data[, code])}.
-The remaining columns are the nonunique values found in the selected
-column(s) of \code{meta}.
+a \code{\link{data.frame}} describing the different values of \code{code} found in
+\code{data} and and \code{meta}. The first three columns are for \code{code}, \code{count},
+and \code{pct}. The latter are from the \code{cols2return} in \code{meta}.
+
+The name of the first column is the value of \code{code}. For example, the first
+column of the \code{data.frame} returned by \code{WIDcodes('age', ...)} is \code{age}.
+The next column is \verb{count = table(data[, code)}. This is followed by
+\code{pct = as.numeric(format(100*count/sum(count)))}.
+
+This is followed by character variables giving the most common value of
+each of \code{cols2return} in \code{meta}. We might naively expect that the value of
+each of \code{cols2return} in \code{meta} would be unique. If that is not the case,
+then "(*)" is appended to the most common value, and the \code{data.frame}
+returned by \code{WIDcodes} will have \verb{attr(*, 'nonunique')} being a list of
+tables of frequencies of all values of each nonunique of the \code{cols2return}
+for each \code{code} in \code{meta}.
 }
 \description{
 Extract definitions from a \verb{_metadata_} file for variables in a
