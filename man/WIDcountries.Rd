@@ -25,7 +25,7 @@ subregion of the country.
 }
 }
 \source{
-\url{https://wid.world}"World Inequality Database"
+\url{https://wid.world} "World Inequality Database"
 }
 \usage{
 WIDcountries
