@@ -51,5 +51,5 @@
 #' subset(WIDcountries,(substr(alpha2, 1, 1)== 'Q')&(nchalpha2>2),titlename)
 #' subset(WIDcountries,(substr(alpha2, 1, 1)== 'X')&(nchalpha2>2),titlename)
 #' 
-#' @source <https://wid.world>"World Inequality Database"
+#' @source <https://wid.world> "World Inequality Database"
 "WIDcountries"
