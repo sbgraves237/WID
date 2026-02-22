@@ -219,6 +219,13 @@
 #' 
 #' table(DE_BYdat$pop) # should be `c(t=24)`. 
 #' 
+#' with(DE_BYdat, table(variable, percentile, year)) 
+#' # should be 1 for each combination of 
+#' variable = `c(sfiinct992, sptinct992)` 
+#'      ["fiscal" (gross) and "pre-tax" (but after pension system adjustments)]
+#' percentile = 6 codes noted above
+#' year = 1909 and 1911 
+#' 
 #' ## DE_BYmeta
 #' table(DE_BYmeta$country) # should be `DE_BY` for both observations. 
 #' table(DE_BYmeta$countryname) # should be `Bavaria` for both observations. 
